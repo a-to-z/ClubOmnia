@@ -1,5 +1,7 @@
 package com.cyanogenlabs.clubomnia;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +17,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,13 +72,24 @@ public class MainActivity extends AppCompatActivity {
             List<Post> posts = Arrays.asList(gson.fromJson(response, Post[].class));
 
             Log.i("PostActivity", posts.size() + " posts loaded.");
+            ArrayList<ListItem> listMockData = new ArrayList<ListItem>();
             for (Post post : posts) {
                 Log.i("PostActivity", post.ID + ": " + post.Name + " : " + post.price);
 
-                itemsAdapter.add(post.Name);
+                ListItem newsData = new ListItem();
+                newsData.setUrl(post.Image);
+                newsData.setHeadline(post.Name);
+                newsData.setReporterName("Pankaj Gupta");
+                newsData.setDate("May 26, 2013, 13:35");
+                listMockData.add(newsData);
+
+
+                //itemsAdapter.add(post.Name);
 
             }
             //listView.setAdapter(itemsAdapter);
+
+            listView.setAdapter(new CustomListAdapter(getApplicationContext(), listMockData));
         }
     };
 

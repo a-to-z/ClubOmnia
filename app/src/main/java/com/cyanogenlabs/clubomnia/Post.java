@@ -18,6 +18,9 @@ public class Post {
     @SerializedName("name")
     String Name;
 
+    @SerializedName("image")
+    String Image;
+
 
     int price ;
 }
