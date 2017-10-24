@@ -1,15 +1,24 @@
 package com.cyanogenlabs.clubomnia;
 
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
+
 /**
  * Created by Ammar on 10/24/2017.
  */
 
-public class ListItem {
+public class ListItem implements Serializable {
 
     private String headline;
     private String reporterName;
     private String date;
     private String url;
+    private Bitmap image;
+
+    public Bitmap getImage() { return image; }
+
+    public void setImage(Bitmap image) { this.image = image; }
 
     public String getUrl() {
         return url;

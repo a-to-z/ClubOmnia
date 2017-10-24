@@ -2,16 +2,20 @@ package com.cyanogenlabs.clubomnia;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private Gson gson;
     private ArrayAdapter<String> itemsAdapter;
     private ListView listView;
+    private ImageView imageView;
+    private ArrayList<ListItem> arrayList;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,60 +51,35 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-        gson = gsonBuilder.create();
+        //GsonBuilder gsonBuilder = new GsonBuilder();
+        //gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        //gson = gsonBuilder.create();
 
+        //imageView = (ImageView) findViewById(R.id.imageView);
         itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 
 
         listView = (ListView) findViewById(R.id.lvItems);
         listView.setAdapter(itemsAdapter);
 
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        fetchPosts();
+        //textView = (TextView) findViewById(R.id.textView);
+
+        Bundle extra = getIntent().getBundleExtra("extra");
+        arrayList = (ArrayList<ListItem>) extra.getSerializable("listData");
+
+
+        for(ListItem listItem : arrayList){
+
+                Log.i("PostExecute", listItem.getHeadline());
+            itemsAdapter.add(listItem.getHeadline());
+
+
+        }
+
 
 
     }
 
-    private void fetchPosts() {
-        StringRequest request = new StringRequest(Request.Method.GET, ENDPOINT, onPostsLoaded, onPostsError);
 
-        requestQueue.add(request);
-    }
-
-    private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            List<Post> posts = Arrays.asList(gson.fromJson(response, Post[].class));
-
-            Log.i("PostActivity", posts.size() + " posts loaded.");
-            ArrayList<ListItem> listMockData = new ArrayList<ListItem>();
-            for (Post post : posts) {
-                Log.i("PostActivity", post.ID + ": " + post.Name + " : " + post.price);
-
-                ListItem newsData = new ListItem();
-                newsData.setUrl(post.Image);
-                newsData.setHeadline(post.Name);
-                newsData.setReporterName("Pankaj Gupta");
-                newsData.setDate("May 26, 2013, 13:35");
-                listMockData.add(newsData);
-
-
-                //itemsAdapter.add(post.Name);
-
-            }
-            //listView.setAdapter(itemsAdapter);
-
-            listView.setAdapter(new CustomListAdapter(getApplicationContext(), listMockData));
-        }
-    };
-
-    private final Response.ErrorListener onPostsError = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.e("PostActivity", error.toString());
-        }
-    };
 
 }

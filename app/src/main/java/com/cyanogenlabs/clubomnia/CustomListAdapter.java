@@ -1,6 +1,5 @@
 package com.cyanogenlabs.clubomnia;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ public class CustomListAdapter extends BaseAdapter {
     private ArrayList<ListItem> listData;
     private LayoutInflater layoutInflater;
 
-    public CustomListAdapter(Context context, ArrayList listData) {
+    public CustomListAdapter(Context context, ArrayList<ListItem> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -49,6 +48,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder.reportedDateView = (TextView) convertView.findViewById(R.id.date);
             holder.imageView = (ImageView) convertView.findViewById(R.id.thumbImage);
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -58,9 +58,10 @@ public class CustomListAdapter extends BaseAdapter {
         holder.reporterNameView.setText("By, " + newsItem.getReporterName());
         holder.reportedDateView.setText(newsItem.getDate());
 
-        if (holder.imageView != null) {
+        /*if (holder.imageView != null) {
             new ImageDownloaderTask(holder.imageView).execute(newsItem.getUrl());
-        }
+        }*/
+
         return convertView;
     }
 
