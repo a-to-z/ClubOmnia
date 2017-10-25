@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.lvItems);
-        listView.setAdapter(itemsAdapter);
+        //listView.setAdapter(itemsAdapter);
 
         //textView = (TextView) findViewById(R.id.textView);
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList = (ArrayList<Categories>) extra.getSerializable("listData");
 
 
-        for(Categories listItem : arrayList){
+        /*for(Categories listItem : arrayList){
 
                 Log.i("MainActivity", listItem.getName());
             itemsAdapter.add(listItem.getName());
@@ -71,12 +72,23 @@ public class MainActivity extends AppCompatActivity {
             BitmapFactory.Options options = new BitmapFactory.Options();
             //options.inSampleSize = 1;
 
-            bitmap = BitmapFactory.decodeByteArray(listItem.getBg().bytes, 0, listItem.getBg().length,options);
+            //bitmap = BitmapFactory.decodeByteArray(listItem.getBg().bytes, 0, listItem.getBg().length,options);
 
-            imageView.setImageBitmap(bitmap);
+            //imageView.setImageBitmap(bitmap);
 
 
-        }
+        }*/
+
+        listView.setAdapter(
+                new ImageListAdapter(
+                        MainActivity.this,
+                        arrayList
+                )
+        );
+/*
+        Glide.with(this)
+                .load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
+                .into(imageView);*/
 
 
 

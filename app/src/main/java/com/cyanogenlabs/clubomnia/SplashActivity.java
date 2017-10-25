@@ -113,17 +113,17 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 Log.i("KEK", Arrays.toString(ab));
             }*/
-/*
+
             Bundle extra = new Bundle();
-            extra.putSerializable("listData",listData);
+            extra.putSerializable("listData",test);
             Intent ii = new Intent(getApplicationContext(), MainActivity.class);
             ii.putExtra("extra", extra);
             startActivity(ii);
-            finish();*/
+            finish();
             //listView.setAdapter(itemsAdapter);
-
+/*
             GetXMLTask xmlTask = new GetXMLTask();
-            xmlTask.execute(test);
+            xmlTask.execute(test);*/
         }
     };
 
@@ -133,7 +133,7 @@ public class SplashActivity extends AppCompatActivity {
             Log.e("PostActivity", error.toString());
         }
     };
-
+/*
     private class GetXMLTask extends AsyncTask<ArrayList<Categories>, Void, ArrayList<Categories>> {
         @Override
         protected ArrayList<Categories> doInBackground(ArrayList<Categories>... urls) {
@@ -159,7 +159,7 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText(SplashActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
             Log.i("bitmap", "bitmap ");
             Bundle extra = new Bundle();
-            extra.putSerializable("listData",result);
+            extra.putSerializable("listData",test);
             Intent ii = new Intent(getApplicationContext(), MainActivity.class);
             ii.putExtra("extra", extra);
             startActivity(ii);
@@ -207,5 +207,5 @@ public class SplashActivity extends AppCompatActivity {
         }
 
     }
-
+*/
 }
