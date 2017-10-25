@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -45,6 +46,7 @@ public class ImageListAdapter extends ArrayAdapter {
 
         }
         ImageView imageView = (ImageView) convertView.findViewById(R.id.thumbImage);
+        TextView textView = (TextView) convertView.findViewById(R.id.title);
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
@@ -56,6 +58,10 @@ public class ImageListAdapter extends ArrayAdapter {
                 .load(urls.get(position).getImage())
                 .apply(requestOptions)
                 .into(imageView);
+
+        textView.setText(urls.get(position).getName());
+
+
 
         return convertView;
     }
