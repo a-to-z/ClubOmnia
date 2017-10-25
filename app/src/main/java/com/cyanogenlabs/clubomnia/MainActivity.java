@@ -2,7 +2,6 @@ package com.cyanogenlabs.clubomnia;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,23 +10,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import static java.io.FileDescriptor.in;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> itemsAdapter;
     private ListView listView;
     private ImageView imageView;
-    private ArrayList<ListItem> arrayList;
+    private ArrayList<Categories> arrayList;
     private TextView textView;
 
     @Override
@@ -55,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         //gson = gsonBuilder.create();
 
-        //imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 
 
@@ -65,13 +55,25 @@ public class MainActivity extends AppCompatActivity {
         //textView = (TextView) findViewById(R.id.textView);
 
         Bundle extra = getIntent().getBundleExtra("extra");
-        arrayList = (ArrayList<ListItem>) extra.getSerializable("listData");
+        arrayList = (ArrayList<Categories>) extra.getSerializable("listData");
 
 
-        for(ListItem listItem : arrayList){
+        for(Categories listItem : arrayList){
 
-                Log.i("PostExecute", listItem.getHeadline());
-            itemsAdapter.add(listItem.getHeadline());
+                Log.i("MainActivity", listItem.getName());
+            itemsAdapter.add(listItem.getName());
+
+
+
+            //imageView.setImageBitmap(listItem.getBg());
+
+            Bitmap bitmap = null;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            //options.inSampleSize = 1;
+
+            bitmap = BitmapFactory.decodeByteArray(listItem.getBg().bytes, 0, listItem.getBg().length,options);
+
+            imageView.setImageBitmap(bitmap);
 
 
         }
