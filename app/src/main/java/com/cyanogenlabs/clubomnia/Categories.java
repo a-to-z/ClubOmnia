@@ -16,7 +16,6 @@ public class Categories implements Serializable {
     public Bitmap backGround;
     public String image;
     public byte bit[];
-    public SerialBitmap bg;
 
     public Categories(long id, String name, byte bit[]){
 
@@ -25,17 +24,6 @@ public class Categories implements Serializable {
         this.bit = bit;
     }
 
-    public Categories(long id, String name, SerialBitmap bg){
-
-        this.id = id;
-        this.name = name;
-        this.bg = bg;
-
-    }
-
-    public SerialBitmap getBg(){ return bg; }
-
-    public int getBgLength(){ return bg.length; }
 
     public Categories(long id, String name, Bitmap backGround){
 

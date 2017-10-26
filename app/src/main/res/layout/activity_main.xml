@@ -14,15 +14,23 @@
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
+            android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/omnia_rect" />
+            app:srcCompat="@mipmap/omnia_rect"
+            android:contentDescription="@string/app_name"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorPrimary"/>
+
 
         <ListView
             android:id="@+id/lvItems"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="0dp"
             android:divider="@color/colorPrimary"
             android:dividerHeight="2dp"

@@ -1,23 +1,17 @@
 package com.cyanogenlabs.clubomnia;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-import static java.io.FileDescriptor.in;
 
 
 public class MainActivity extends AppCompatActivity {
